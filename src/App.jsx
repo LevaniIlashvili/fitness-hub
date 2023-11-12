@@ -1,5 +1,11 @@
+import ExercisesPage from "./pages/ExercisesPage";
+
 const App = () => {
-  return <></>;
+  return (
+    <>
+      <ExercisesPage />
+    </>
+  );
 };
 
 export default App;
