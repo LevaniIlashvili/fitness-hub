@@ -1,26 +1,20 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { fetchExercisesData } from "../../fetchExercisesData";
 import { dummyExercises } from "../../data";
 import styled from "styled-components";
+import ExerciseCard from "../components/ExerciseCard";
+import Pagination from "../components/Pagination";
+import BodyPartsList from "../components/BodyPartsList";
+import { useSelector } from "react-redux";
 
 const ExercisesPage = () => {
+  const selectedBodyPart = useSelector(
+    (state) => state.bodyParts.selectedBodyPart
+  );
+  const currentPage = useSelector((state) => state.pagination.currentPage);
   const [exercises, setExercises] = useState(dummyExercises);
-  const [selectedBodyPart, setSelectedBodyPart] = useState("all");
+  // const [exercises, setExercises] = useState([]);
   const [searchText, setSearchText] = useState("");
-
-  const bodyParts = [
-    "all",
-    "back",
-    "cardio",
-    "chest",
-    "lower arms",
-    "lower legs",
-    "neck",
-    "shoulders",
-    "upper arms",
-    "upper legs",
-    "waist",
-  ];
 
   // const getAllExercises = async () => {
   //   const allExercises = await fetchExercisesData(
@@ -29,32 +23,47 @@ const ExercisesPage = () => {
   //   setExercises(allExercises);
   // };
 
-  const getExercisesByBodyPart = async () => {
-    // const exercises = await fetchExercisesData(
-    //   `https://exercisedb.p.rapidapi.com/exercises/bodyPart/${selectedBodyPart}`
-    // );
-    if (selectedBodyPart === "all") {
-      setExercises(dummyExercises);
-    } else {
-      setExercises(
-        dummyExercises.filter(
-          (exercise) => exercise.bodyPart === selectedBodyPart
-        )
-      );
-    }
-  };
+  // const getExercisesByBodyPart = async () => {
+  //   // const exercises = await fetchExercisesData(
+  //   //   `https://exercisedb.p.rapidapi.com/exercises/bodyPart/${selectedBodyPart}`
+  //   // );
+  //   if (selectedBodyPart === "all") {
+  //     setExercises(dummyExercises);
+  //   } else {
+  //     setExercises(
+  //       dummyExercises.filter(
+  //         (exercise) => exercise.bodyPart === selectedBodyPart
+  //       )
+  //     );
+  //   }
+  // };
 
-  const searchExercises = async () => {
-    setExercises(
-      dummyExercises.filter(
-        (exercise) =>
-          exercise.name.toLowerCase().includes(searchText) ||
-          exercise.target.toLowerCase().includes(searchText) ||
-          exercise.equipment.toLowerCase().includes(searchText) ||
-          exercise.bodyPart.toLowerCase().includes(searchText)
-      )
-    );
-  };
+  // const searchExercises = async () => {
+  //   setExercises(
+  //     dummyExercises.filter((exercise) => {
+  //       if (selectedBodyPart === "all") {
+  //         if (
+  //           exercise.name.toLowerCase().includes(searchText) ||
+  //           exercise.target.toLowerCase().includes(searchText) ||
+  //           exercise.equipment.toLowerCase().includes(searchText) ||
+  //           exercise.bodyPart.toLowerCase().includes(searchText)
+  //         ) {
+  //           return exercise;
+  //         }
+  //       } else {
+  //         if (
+  //           (exercise.name.toLowerCase().includes(searchText) ||
+  //             exercise.target.toLowerCase().includes(searchText) ||
+  //             exercise.equipment.toLowerCase().includes(searchText) ||
+  //             exercise.bodyPart.toLowerCase().includes(searchText)) &&
+  //           exercise.bodyPart === selectedBodyPart
+  //         ) {
+  //           return exercise;
+  //         }
+  //       }
+  //     })
+  //   );
+  // };
 
   // useEffect(() => {
   //   getAllExercises();
@@ -62,8 +71,27 @@ const ExercisesPage = () => {
 
   useEffect(() => {
     if (!selectedBodyPart) return;
-    getExercisesByBodyPart();
-  }, [selectedBodyPart]);
+    setExercises(
+      dummyExercises.filter((exercise) => {
+        if (selectedBodyPart === "all") {
+          return (
+            exercise.name.toLowerCase().includes(searchText) ||
+            exercise.target.toLowerCase().includes(searchText) ||
+            exercise.equipment.toLowerCase().includes(searchText) ||
+            exercise.bodyPart.toLowerCase().includes(searchText)
+          );
+        } else {
+          return (
+            (exercise.name.toLowerCase().includes(searchText) ||
+              exercise.target.toLowerCase().includes(searchText) ||
+              exercise.equipment.toLowerCase().includes(searchText) ||
+              exercise.bodyPart.toLowerCase().includes(searchText)) &&
+            exercise.bodyPart === selectedBodyPart
+          );
+        }
+      })
+    );
+  }, [selectedBodyPart, searchText]);
 
   console.log(exercises);
 
@@ -76,36 +104,16 @@ const ExercisesPage = () => {
           className="search__input"
           placeholder="Search For Exercises"
         />
-        <button className="search__button" onClick={searchExercises}>
-          Search
-        </button>
       </div>
-      <ul className="body-parts__container">
-        {bodyParts?.map((bodyPart, index) => {
-          return (
-            <li key={index}>
-              <input
-                type="radio"
-                name="body_parts"
-                id={bodyPart}
-                checked={bodyPart === selectedBodyPart}
-                onChange={() => setSelectedBodyPart(bodyPart)}
-              />
-              <label htmlFor={bodyPart}>{bodyPart}</label>
-            </li>
-          );
-        })}
-      </ul>
+      <BodyPartsList />
       <section className="exercises__container">
-        {exercises.map((exercise) => {
-          return (
-            <div className="exercise__container" key={exercise.id}>
-              <p>{exercise.name}</p>
-              <img src={exercise.gifUrl} />
-            </div>
-          );
-        })}
+        {exercises
+          .slice(currentPage * 9, (currentPage + 1) * 9)
+          .map((exercise) => {
+            return <ExerciseCard key={exercise.id} exercise={exercise} />;
+          })}
       </section>
+      <Pagination exercises={exercises} />
     </Wrapper>
   );
 };
@@ -125,7 +133,6 @@ const Wrapper = styled.section`
     width: 60rem;
     height: 100%;
     border: 1px solid #adb5bd;
-    border-right: none;
     border-radius: 3px;
     padding: 1rem;
     outline: none;
@@ -143,53 +150,12 @@ const Wrapper = styled.section`
     cursor: pointer;
   }
 
-  .body-parts__container {
-    display: flex;
-    gap: 0.5rem;
-    list-style: none;
-  }
-
-  .body-parts__container input {
-    display: none;
-  }
-
-  .body-parts__container label {
-    padding: 1rem;
-    border: 1px solid var(--gray);
-    border-radius: 3px;
-    cursor: pointer;
-  }
-
-  .body-parts__container label:hover {
-    border-color: var(--orange);
-  }
-
-  .body-parts__container label:active {
-    background-color: var(--orange);
-    color: var(--white);
-  }
-
-  .body-parts__container input[type="radio"]:checked + label {
-    background-color: var(--dark-orange);
-    border-color: var(--dark-orange);
-    color: var(--white);
-  }
-
   .exercises__container {
-    width: 80vw;
+    max-width: 80vw;
     display: flex;
+    /* justify-content: center; */
     flex-wrap: wrap;
-  }
-
-  .exercise__container {
-    width: calc(80vw / 3);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .exercise__container img {
-    width: 100%;
+    gap: 3rem;
   }
 `;
 
