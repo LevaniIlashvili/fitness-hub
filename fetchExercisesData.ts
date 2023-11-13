@@ -10,7 +10,7 @@ const options = {
   },
 };
 
-export const fetchExercisesData = async (url) => {
+export const fetchExercisesData = async (url: string) => {
   console.log(options);
   const response = await axios.get(url, options);
   console.log(response);

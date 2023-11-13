@@ -1,11 +1,12 @@
+import React from "react";
 import styled from "styled-components";
-import { useSelector, useDispatch } from "react-redux";
+import { useAppSelector, useAppDispatch } from "../app/hooks";
 import { selectBodyPart } from "../app/redux/bodyParts/bodyParts";
 import { goToPage } from "../app/redux/pagination/pagination";
 
 const BodyPartsList = () => {
-  const dispatch = useDispatch();
-  const selectedBodyPart = useSelector(
+  const dispatch = useAppDispatch();
+  const selectedBodyPart = useAppSelector(
     (state) => state.bodyParts.selectedBodyPart
   );
 

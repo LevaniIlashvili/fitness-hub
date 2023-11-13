@@ -1,4 +1,5 @@
-import ExercisesPage from "./pages/ExercisesPage";
+import React from "react";
+import ExercisesPage from "./pages/ExercisesPage.tsx";
 
 const App = () => {
   return (

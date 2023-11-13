@@ -1,4 +1,6 @@
-export const dummyExercises = [
+import { Exercise } from "./types/main";
+
+export const dummyExercises: Exercise[] = [
   {
     bodyPart: "waist",
     equipment: "body weight",

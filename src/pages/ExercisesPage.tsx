@@ -1,20 +1,21 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { fetchExercisesData } from "../../fetchExercisesData";
 import { dummyExercises } from "../../data";
 import styled from "styled-components";
-import ExerciseCard from "../components/ExerciseCard";
-import Pagination from "../components/Pagination";
-import BodyPartsList from "../components/BodyPartsList";
-import { useSelector } from "react-redux";
+import ExerciseCard from "../components/ExerciseCard.tsx";
+import Pagination from "../components/Pagination.tsx";
+import BodyPartsList from "../components/BodyPartsList.tsx";
+import { useAppSelector } from "../app/hooks.ts";
+import { Exercise } from "../../types/main.ts";
 
 const ExercisesPage = () => {
-  const selectedBodyPart = useSelector(
+  const selectedBodyPart = useAppSelector(
     (state) => state.bodyParts.selectedBodyPart
   );
-  const currentPage = useSelector((state) => state.pagination.currentPage);
-  const [exercises, setExercises] = useState(dummyExercises);
+  const currentPage = useAppSelector((state) => state.pagination.currentPage);
+  const [exercises, setExercises] = useState<Exercise[]>(dummyExercises);
   // const [exercises, setExercises] = useState([]);
-  const [searchText, setSearchText] = useState("");
+  const [searchText, setSearchText] = useState<string>("");
 
   // const getAllExercises = async () => {
   //   const allExercises = await fetchExercisesData(
@@ -72,7 +73,7 @@ const ExercisesPage = () => {
   useEffect(() => {
     if (!selectedBodyPart) return;
     setExercises(
-      dummyExercises.filter((exercise) => {
+      dummyExercises.filter((exercise: Exercise): boolean => {
         if (selectedBodyPart === "all") {
           return (
             exercise.name.toLowerCase().includes(searchText) ||
@@ -100,7 +101,9 @@ const ExercisesPage = () => {
       <div className="search__container">
         <input
           type="search"
-          onChange={(e) => setSearchText(e.target.value)}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setSearchText(e.target.value)
+          }
           className="search__input"
           placeholder="Search For Exercises"
         />

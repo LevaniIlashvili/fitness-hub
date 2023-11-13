@@ -1,13 +1,15 @@
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import { useAppSelector, useAppDispatch } from "../app/hooks";
 import styled from "styled-components";
 import {
   goToNextPage,
   goToPreviousPage,
 } from "../app/redux/pagination/pagination";
+import { Exercise } from "../../types/main";
 
-function Pagination({ exercises }) {
-  const dispatch = useDispatch();
-  const currentPage = useSelector((state) => state.pagination.currentPage);
+function Pagination({ exercises }: { exercises: Exercise[] }) {
+  const dispatch = useAppDispatch();
+  const currentPage = useAppSelector((state) => state.pagination.currentPage);
 
   return (
     <>

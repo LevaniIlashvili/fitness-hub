@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components";
+import { Exercise } from "../../types/main";
 
-const ExerciseCard = ({ exercise }) => {
+const ExerciseCard = ({ exercise }: { exercise: Exercise }) => {
   return (
     <Wrapper>
       <img src={exercise.gifUrl} />
