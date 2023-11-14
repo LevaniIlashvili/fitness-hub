@@ -133,7 +133,7 @@ const Wrapper = styled.section`
   }
 
   .search__input {
-    width: 60rem;
+    width: 65vw;
     height: 100%;
     border: 1px solid #adb5bd;
     border-radius: 3px;
