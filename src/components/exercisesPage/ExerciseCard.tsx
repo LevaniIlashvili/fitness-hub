@@ -9,7 +9,12 @@ const ExerciseCard = ({ exercise }: { exercise: Exercise }) => {
   console.log(exercise.name);
 
   return (
-    <Wrapper onClick={() => navigate(`/exercises/${exercise.id}`)}>
+    <Wrapper
+      onClick={() => {
+        navigate(`/exercises/${exercise.id}`);
+        window.scrollTo(0, 0);
+      }}
+    >
       <img src={exercise.gifUrl} />
       <div className="exercise-target__container">
         <span className="exercise-body-part">{exercise.bodyPart}</span>
@@ -22,7 +27,6 @@ const ExerciseCard = ({ exercise }: { exercise: Exercise }) => {
 
 const Wrapper = styled.article`
   width: calc((80vw - 6rem) / 3);
-  /* height: calc((80vw - 6rem) / 3 + 8rem); */
   display: flex;
   flex-direction: column;
   border-top: 4px solid var(--dark-orange);
