@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 const ExerciseCard = ({ exercise }: { exercise: Exercise }) => {
   const navigate = useNavigate();
 
+  console.log(exercise.name);
+
   return (
     <Wrapper onClick={() => navigate(`/exercises/${exercise.id}`)}>
       <img src={exercise.gifUrl} />
@@ -20,11 +22,11 @@ const ExerciseCard = ({ exercise }: { exercise: Exercise }) => {
 
 const Wrapper = styled.article`
   width: calc((80vw - 6rem) / 3);
-  height: calc((80vw - 6rem) / 3 + 8rem);
+  /* height: calc((80vw - 6rem) / 3 + 8rem); */
   display: flex;
   flex-direction: column;
   border-top: 4px solid var(--dark-orange);
-  padding-top: 1rem;
+  padding-top: 0rem;
   cursor: pointer;
 
   img {
