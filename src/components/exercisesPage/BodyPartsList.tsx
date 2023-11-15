@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import { useAppSelector, useAppDispatch } from "../app/hooks";
-import { selectBodyPart } from "../app/redux/bodyParts/bodyParts";
-import { goToPage } from "../app/redux/pagination/pagination";
+import { useAppSelector, useAppDispatch } from "../../app/hooks";
+import { selectBodyPart } from "../../app/redux/bodyParts/bodyParts";
+import { goToPage } from "../../app/redux/pagination/pagination";
 import { LuChevronLeft, LuChevronRight } from "react-icons/lu";
 
 const BodyPartsList = () => {

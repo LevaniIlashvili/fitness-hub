@@ -1,12 +1,12 @@
 import React from "react";
-import { useAppSelector, useAppDispatch } from "../app/hooks";
+import { useAppSelector, useAppDispatch } from "../../app/hooks";
 import styled from "styled-components";
 import {
   goToNextPage,
   goToPreviousPage,
   goToPage,
-} from "../app/redux/pagination/pagination";
-import { Exercise } from "../../types/main";
+} from "../../app/redux/pagination/pagination";
+import { Exercise } from "../../../types/main";
 import { LuChevronLeft, LuChevronRight } from "react-icons/lu";
 
 const Pagination = ({ exercises }: { exercises: Exercise[] }) => {

@@ -1,10 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-import { Exercise } from "../../types/main";
+import { Exercise } from "../../../types/main";
+import { useNavigate } from "react-router-dom";
 
 const ExerciseCard = ({ exercise }: { exercise: Exercise }) => {
+  const navigate = useNavigate();
+
   return (
-    <Wrapper>
+    <Wrapper onClick={() => navigate(`/exercises/${exercise.id}`)}>
       <img src={exercise.gifUrl} />
       <div className="exercise-target__container">
         <span className="exercise-body-part">{exercise.bodyPart}</span>
@@ -22,6 +25,7 @@ const Wrapper = styled.article`
   flex-direction: column;
   border-top: 4px solid var(--dark-orange);
   padding-top: 1rem;
+  cursor: pointer;
 
   img {
     width: 100%;
