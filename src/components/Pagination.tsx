@@ -51,21 +51,29 @@ const Pagination = ({ exercises }: { exercises: Exercise[] }) => {
 
         if (page >= secondPage + 2) {
           if (page === secondPage + 2) {
-            pages.push(<span className="elipsis">...</span>);
+            pages.push(
+              <span key="elipsis" className="elipsis">
+                ...
+              </span>
+            );
           }
           continue;
         }
 
         if (secondPage === page && secondPage + 2 === lastPage) {
-          pages.push(<span className="elipsis">...</span>);
+          pages.push(
+            <span key="elipsis" className="elipsis">
+              ...
+            </span>
+          );
           pages.push(<Page page={page} key={page} />);
           continue;
         }
 
-        pages.push(<Page page={page} />);
+        pages.push(<Page key={page} page={page} />);
       }
 
-      pages.push(<Page page={lastPage} />);
+      pages.push(<Page key={lastPage} page={lastPage} />);
     }
     return pages;
   };
@@ -106,6 +114,7 @@ const Wrapper = styled.nav`
   .page {
     cursor: pointer;
     padding: 1rem 1rem;
+    font-weight: 500;
   }
 
   .active-page {

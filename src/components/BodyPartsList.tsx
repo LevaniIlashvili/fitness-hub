@@ -111,8 +111,8 @@ const Wrapper = styled.section`
   ul {
     display: flex;
     align-items: center;
-    height: 4rem;
-    width: 64vw;
+    height: 4.1rem;
+    width: 72vw;
     gap: 0.5rem;
     list-style: none;
     overflow-x: auto;
@@ -146,6 +146,7 @@ const Wrapper = styled.section`
     padding: 1rem;
     border: 1px solid var(--gray);
     border-radius: 3px;
+    font-weight: 500;
     cursor: pointer;
   }
 

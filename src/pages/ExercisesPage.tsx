@@ -129,12 +129,13 @@ const Wrapper = styled.section`
   gap: 5rem;
 
   .search__container {
-    height: 3.5rem;
+    height: 4rem;
   }
 
   .search__input {
     width: 65vw;
     height: 100%;
+    font-size: 1.5rem;
     border: 1px solid #adb5bd;
     border-radius: 3px;
     padding: 1rem;
@@ -142,23 +143,13 @@ const Wrapper = styled.section`
     font-weight: 600;
   }
 
-  .search__button {
-    height: 100%;
-    background-color: var(--dark-orange);
-    color: var(--white);
-    font-weight: 600;
-    border: none;
-    padding: 0 3rem;
-    border-radius: 3px;
-    cursor: pointer;
-  }
-
   .exercises__container {
-    max-width: 80vw;
+    width: 80vw;
     display: flex;
-    /* justify-content: center; */
+    justify-content: flex-start;
     flex-wrap: wrap;
     gap: 3rem;
+    margin-bottom: 3rem;
   }
 `;
 
