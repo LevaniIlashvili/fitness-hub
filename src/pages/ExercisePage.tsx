@@ -58,8 +58,8 @@ const Wrapper = styled.section`
   }
 
   .exercise-img {
-    width: 40vw;
-    height: 40vw;
+    width: 50vw;
+    height: 50vw;
   }
 
   h1 {
@@ -88,6 +88,29 @@ const Wrapper = styled.section`
     background-color: #af7b147d;
     padding: 1.5rem;
     border-radius: 50%;
+  }
+
+  @media (max-width: 800px) {
+    .exercise {
+      flex-direction: column;
+      align-items: center;
+      padding: 3rem;
+    }
+
+    .exercise-img {
+      width: 70vw;
+      height: 70vw;
+    }
+  }
+
+  @media (max-width: 500px) {
+    h1 {
+      font-size: 3rem;
+    }
+
+    .instructions {
+      font-size: 1.5rem;
+    }
   }
 `;
 

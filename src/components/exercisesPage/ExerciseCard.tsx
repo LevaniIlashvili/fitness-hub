@@ -15,7 +15,9 @@ const ExerciseCard = ({ exercise }: { exercise: Exercise }) => {
         window.scrollTo(0, 0);
       }}
     >
-      <img src={exercise.gifUrl} />
+      <div className="image-container">
+        <img src={exercise.gifUrl} />
+      </div>
       <div className="exercise-target__container">
         <span className="exercise-body-part">{exercise.bodyPart}</span>
         <span className="exercise-target-muscle">{exercise.target}</span>
@@ -26,7 +28,8 @@ const ExerciseCard = ({ exercise }: { exercise: Exercise }) => {
 };
 
 const Wrapper = styled.article`
-  width: calc((80vw - 6rem) / 3);
+  /* width: calc((80vw - 6rem) / 3); */
+  /* max-width: 34rem; */
   display: flex;
   flex-direction: column;
   border-top: 4px solid var(--dark-orange);
@@ -34,9 +37,20 @@ const Wrapper = styled.article`
   cursor: pointer;
 
   img {
-    width: 100%;
-    height: calc((80vw - 6rem) / 3);
+    /* height: 100%; */
     margin-bottom: 0.5rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Maintain the aspect ratio and cover the container */
+  }
+
+  .image-container {
+    position: relative;
+    overflow: hidden;
+    padding-bottom: 100%; /* Set the aspect ratio (e.g., 1:1) */
   }
 
   .exercise-target__container {
