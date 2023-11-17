@@ -20,24 +20,39 @@ const ExercisePage = () => {
 
   return (
     <Wrapper>
-      <div className="exercise">
-        <img
-          className="exercise-img"
-          src={exercise.gifUrl}
-          alt="gif of showing how to do exercise"
-        />
-        <div className="text-container">
-          <h1>{exercise.name}</h1>
-          <p className="instructions">{...exercise.instructions}</p>
-          <span className="category">
-            <img className="icon" src={upperBodyIcon} alt="" />{" "}
+      <div className="exercise__container">
+        <div className="exercise__img-container">
+          <img
+            className="exercise__img"
+            src={exercise.gifUrl}
+            alt={`gif of showing how to do ${exercise.name}`}
+          />
+        </div>
+        <div>
+          <h1 className="exercise__header">{exercise.name}</h1>
+          <p className="exercise__instructions">{...exercise.instructions}</p>
+          <span className="exercise__category">
+            <img
+              className="category__icon"
+              src={upperBodyIcon}
+              alt="icon of human body"
+            />
             {exercise.bodyPart}
           </span>
-          <span className="category">
-            <img className="icon" src={targetIcon} alt="" /> {exercise.target}
+          <span className="exercise__category">
+            <img
+              className="category__icon"
+              src={targetIcon}
+              alt="icon of target"
+            />
+            {exercise.target}
           </span>
-          <span className="category">
-            <img className="icon" src={dumbellIcon} alt="" />
+          <span className="exercise__category">
+            <img
+              className="category__icon"
+              src={dumbellIcon}
+              alt="icon of dumbell"
+            />
             {exercise.equipment}
           </span>
         </div>
@@ -51,30 +66,30 @@ const ExercisePage = () => {
 };
 
 const Wrapper = styled.section`
-  .exercise {
+  .exercise__container {
     display: flex;
     padding-top: 10rem;
     margin-bottom: 5rem;
   }
 
-  .exercise-img {
+  .exercise__img {
     width: 50vw;
     height: 50vw;
   }
 
-  h1 {
+  .exercise__header {
     font-size: 4.5rem;
     margin-bottom: 3rem;
   }
 
-  .instructions {
+  .exercise__instructions {
     font-size: 1.8rem;
     font-weight: 400;
     margin-bottom: 3rem;
     line-height: 2.5rem;
   }
 
-  .category {
+  .exercise__category {
     display: flex;
     align-items: center;
     gap: 1rem;
@@ -83,7 +98,7 @@ const Wrapper = styled.section`
     margin-bottom: 1rem;
   }
 
-  .icon {
+  .category__icon {
     width: 7rem;
     background-color: #af7b147d;
     padding: 1.5rem;
@@ -97,18 +112,18 @@ const Wrapper = styled.section`
       padding: 3rem;
     }
 
-    .exercise-img {
+    .exercise__img {
       width: 70vw;
       height: 70vw;
     }
   }
 
   @media (max-width: 500px) {
-    h1 {
+    .exercise__header {
       font-size: 3rem;
     }
 
-    .instructions {
+    .exercise__instructions {
       font-size: 1.5rem;
     }
   }

@@ -98,21 +98,19 @@ const ExercisesPage = () => {
 
   return (
     <Wrapper>
-      <div className="search__container">
-        <input
-          type="search"
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setSearchText(e.target.value)
-          }
-          className="search__input"
-          placeholder="Search For Exercises"
-        />
-      </div>
+      <input
+        type="search"
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+          setSearchText(e.target.value)
+        }
+        className="search__input"
+        placeholder="Search For Exercises"
+      />
       <BodyPartsList />
       <section className="exercises__container">
         {exercises
           .slice(currentPage * 9, (currentPage + 1) * 9)
-          .map((exercise) => {
+          .map((exercise: Exercise) => {
             return <ExerciseCard key={exercise.id} exercise={exercise} />;
           })}
       </section>
@@ -128,13 +126,9 @@ const Wrapper = styled.section`
   padding-top: 5rem;
   gap: 5rem;
 
-  .search__container {
-    height: 4rem;
-  }
-
   .search__input {
     width: 65vw;
-    height: 100%;
+    height: 4rem;
     font-size: 1.5rem;
     border: 1px solid #adb5bd;
     border-radius: 3px;

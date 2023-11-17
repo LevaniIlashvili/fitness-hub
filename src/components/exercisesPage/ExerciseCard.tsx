@@ -6,38 +6,44 @@ import { useNavigate } from "react-router-dom";
 const ExerciseCard = ({ exercise }: { exercise: Exercise }) => {
   const navigate = useNavigate();
 
-  console.log(exercise.name);
-
   return (
     <Wrapper
       onClick={() => {
         navigate(`/exercises/${exercise.id}`);
         window.scrollTo(0, 0);
       }}
+      aria-label={`View details for ${exercise.name}`}
     >
-      <div className="image-container">
-        <img src={exercise.gifUrl} />
+      <div className="image__container">
+        <img
+          className="image"
+          src={exercise.gifUrl}
+          alt={`Thumbnail for ${exercise.name}`}
+        />
       </div>
       <div className="exercise-target__container">
-        <span className="exercise-body-part">{exercise.bodyPart}</span>
-        <span className="exercise-target-muscle">{exercise.target}</span>
+        <span className="exercise-target__body-part">{exercise.bodyPart}</span>
+        <span className="exercise-target__muscle">{exercise.target}</span>
       </div>
-      <p>{exercise.name}</p>
+      <p className="exercise-name">{exercise.name}</p>
     </Wrapper>
   );
 };
 
 const Wrapper = styled.article`
-  /* width: calc((80vw - 6rem) / 3); */
-  /* max-width: 34rem; */
   display: flex;
   flex-direction: column;
   border-top: 4px solid var(--dark-orange);
   padding-top: 0rem;
   cursor: pointer;
 
+  .image__container {
+    position: relative;
+    overflow: hidden;
+    padding-bottom: 100%; /* Set the aspect ratio (e.g., 1:1) */
+  }
+
   img {
-    /* height: 100%; */
     margin-bottom: 0.5rem;
     position: absolute;
     top: 0;
@@ -47,20 +53,14 @@ const Wrapper = styled.article`
     object-fit: cover; /* Maintain the aspect ratio and cover the container */
   }
 
-  .image-container {
-    position: relative;
-    overflow: hidden;
-    padding-bottom: 100%; /* Set the aspect ratio (e.g., 1:1) */
-  }
-
   .exercise-target__container {
     display: flex;
     gap: 1rem;
     margin-bottom: 1rem;
   }
 
-  .exercise-body-part,
-  .exercise-target-muscle {
+  .exercise-target__body-part,
+  .exercise-target__muscle {
     display: inline-block;
     color: var(--white);
     padding: 0.8rem 2rem;
@@ -71,15 +71,15 @@ const Wrapper = styled.article`
     font-weight: 500;
   }
 
-  .exercise-body-part {
+  .exercise-target__body-part {
     background-color: var(--dark-orange);
   }
 
-  .exercise-target-muscle {
+  .exercise-target__muscle {
     background-color: var(--extra-light-orange);
   }
 
-  p {
+  .exercise-name {
     font-weight: 700;
     white-space: nowrap;
     overflow: hidden;

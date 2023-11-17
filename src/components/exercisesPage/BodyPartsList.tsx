@@ -76,10 +76,10 @@ const BodyPartsList = () => {
           <LuChevronLeft />
         </button>
       )}
-      <ul ref={containerRef}>
+      <ul className="body-parts__container" ref={containerRef}>
         {bodyParts.map((bodyPart, index) => {
           return (
-            <li key={index}>
+            <li className="body-parts__item" key={index}>
               <input
                 type="radio"
                 name="body_parts"
@@ -108,7 +108,7 @@ const Wrapper = styled.section`
   display: flex;
   gap: 0.2rem;
 
-  ul {
+  .body-parts__container {
     display: flex;
     align-items: center;
     height: 4.1rem;
@@ -120,7 +120,7 @@ const Wrapper = styled.section`
     scrollbar-width: none; /* Firefox */
   }
 
-  ul::-webkit-scrollbar {
+  .body-parts__container::-webkit-scrollbar {
     display: none; /* Safari and Chrome */
   }
 
@@ -134,15 +134,15 @@ const Wrapper = styled.section`
     background-color: #97979784;
   }
 
-  li {
+  .body-parts__item {
     white-space: nowrap;
   }
 
-  input {
+  .body-parts__item input {
     display: none;
   }
 
-  label {
+  .body-parts__item label {
     padding: 1rem;
     border: 1px solid var(--gray);
     border-radius: 3px;
@@ -150,16 +150,16 @@ const Wrapper = styled.section`
     cursor: pointer;
   }
 
-  label:hover {
+  .body-parts__item label:hover {
     border-color: var(--orange);
   }
 
-  label:active {
+  .body-parts__item label:active {
     background-color: var(--orange);
     color: var(--white);
   }
 
-  input[type="radio"]:checked + label {
+  .body-parts__item input:checked + label {
     background-color: var(--dark-orange);
     border-color: var(--dark-orange);
     color: var(--white);

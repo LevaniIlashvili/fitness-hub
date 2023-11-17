@@ -3,6 +3,11 @@ import { dummyExercises } from "../../../data";
 import ExerciseCard from "../exercisesPage/ExerciseCard";
 import React, { useState, useEffect } from "react";
 import { IoIosArrowRoundForward, IoIosArrowRoundBack } from "react-icons/io";
+import { Exercise } from "../../../types/main";
+
+interface WrapperProps {
+  $screenwidth: number;
+}
 
 const SimilarExercises = ({
   exerciseTarget,
@@ -15,7 +20,7 @@ const SimilarExercises = ({
   const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth);
 
   const exercises = dummyExercises.filter(
-    (exercise) =>
+    (exercise: Exercise): boolean =>
       exercise.target === exerciseTarget && exercise.name !== exerciseName
   );
 
@@ -29,17 +34,14 @@ const SimilarExercises = ({
     };
   }, []);
 
-  console.log(exercises);
-  console.log(screenWidth);
-
   const exercisePerPage = screenWidth > 800 ? 3 : screenWidth > 400 ? 2 : 1;
 
   return (
-    <Wrapper screenwidth={screenWidth}>
-      <h2>
+    <Wrapper $screenwidth={screenWidth}>
+      <h2 className="header">
         Similar <span>Exercises</span>
       </h2>
-      <ul>
+      <ul className="exercises__container">
         {exercises
           .slice(
             currentPage * exercisePerPage,
@@ -49,15 +51,15 @@ const SimilarExercises = ({
             return <ExerciseCard exercise={exercise} key={exercise.id} />;
           })}
       </ul>
-      <div className="navigation-btn__container">
+      <nav className="navigation__container">
         <button
-          className="navigation-btn navigation-btn--previous"
+          className="navigation__btn"
           onClick={() => currentPage > 0 && setCurrentPage(currentPage - 1)}
         >
           <IoIosArrowRoundBack />
         </button>
         <button
-          className="navigation-btn navigation-btn--next"
+          className="navigation__btn"
           onClick={() =>
             currentPage < 9 / exercisePerPage - 1 &&
             setCurrentPage(currentPage + 1)
@@ -65,30 +67,27 @@ const SimilarExercises = ({
         >
           <IoIosArrowRoundForward />
         </button>
-      </div>
+      </nav>
     </Wrapper>
   );
 };
 
-const Wrapper = styled.section`
+const Wrapper = styled.section<WrapperProps>`
   padding: 0 5rem;
 
-  h2 {
+  .header {
     font-size: 3rem;
     margin-bottom: 4rem;
   }
 
-  h2 span {
+  .header span {
     color: var(--dark-orange);
   }
 
-  ul {
-    /* display: flex;
-    justify-content: space-between;
-    gap: 2rem; */
+  .exercises__container {
     grid-template-columns: ${(props) =>
       `repeat(${
-        props.screenwidth > 800 ? 3 : props.screenwidth > 400 ? 2 : 1
+        props.$screenwidth > 800 ? 3 : props.$screenwidth > 400 ? 2 : 1
       }, minmax(10rem, 1fr))`};
     column-gap: 2rem;
     display: grid;
@@ -99,21 +98,21 @@ const Wrapper = styled.section`
   @media (max-width: 800px) {
     padding: 0 1rem;
 
-    ul {
+    .exercises__container {
       padding: 0 2rem;
     }
 
-    h2 {
+    .header {
       margin-bottom: 2rem;
     }
   }
 
-  .navigation-btn__container {
+  .navigation__container {
     display: flex;
     justify-content: flex-end;
   }
 
-  .navigation-btn {
+  .navigation__btn {
     border: none;
     font-size: 5rem;
     color: var(--dark-orange);
