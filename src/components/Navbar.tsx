@@ -10,10 +10,10 @@ const Navbar = () => {
       <h1>Fitness Hub</h1>
 
       <div className="link-container">
-        <Link className="link" to="exercises">
+        <Link className="link" to="/exercises">
           exercise
         </Link>
-        <Link className="link" to="food">
+        <Link className="link" to="/food">
           food
         </Link>
         {/* <Link className="link" to="calculator">
