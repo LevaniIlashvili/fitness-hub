@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import healthyVitaminColorful from "../assets/healthy-vitamin-colorful.jpg";
+import { IoMdArrowDropright } from "react-icons/io";
 
 interface FoodSearchResult {
   food_name: string;
@@ -25,8 +26,6 @@ const FoodSearchPage = () => {
   const [fullSearchResults, setFullSearchResults] = useState<
     FoodSearchResult[]
   >([]);
-  const [showFullSearchResults, setShowFullSearchResults] =
-    useState<boolean>(false);
 
   const navigate = useNavigate();
 
@@ -49,6 +48,25 @@ const FoodSearchPage = () => {
     }
   };
 
+  // const getFoodNutritionData = async () => {
+  //   try {
+  //     const response = await axios.post(
+  //       "https://trackapi.nutritionix.com/v2/natural/nutrients",
+  //       { query: [] },
+  //       {
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //           "x-app-id": import.meta.env.VITE_NUTRITIONIX_ID,
+  //           "x-app-key": import.meta.env.VITE_NUTRITIONIX_KEY,
+  //         },
+  //       }
+  //     );
+  //     console.log(response);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
   useEffect(() => {
     if (!searchQuery) {
       setAutoCompleteResults([]);
@@ -59,25 +77,31 @@ const FoodSearchPage = () => {
 
   return (
     <Wrapper>
-      <div className="search-container">
-        <div className="overlay"></div>
+      <section className="search-container">
+        <div
+          className="search-container__overlay"
+          onClick={() => setSearchQuery("")}
+        ></div>
         <div>
-          <input
-            className="search__input"
-            type="text"
-            placeholder="Search for food"
-            onChange={(e) => setSearchQuery(e.target.value)}
-            value={searchQuery}
-          />
-          <button
-            onClick={() => {
-              setSearchQuery("");
-              setFullSearchResults(foodSearchResults);
-            }}
-          >
-            search
-          </button>
-          <div className="autocomplete__container">
+          <div className="search-container__search-input-container">
+            <input
+              className="search-container__search-input"
+              type="text"
+              placeholder="Search for food"
+              onChange={(e) => setSearchQuery(e.target.value)}
+              value={searchQuery}
+            />
+            <button
+              className="search-container__search-button"
+              onClick={() => {
+                setSearchQuery("");
+                setFullSearchResults(foodSearchResults);
+              }}
+            >
+              search
+            </button>
+          </div>
+          <div className="search-container__autocomplete">
             {autoCompleteResults.map((result: FoodSearchResult) => {
               return (
                 <div
@@ -86,37 +110,48 @@ const FoodSearchPage = () => {
                   onClick={() => navigate(`/food/${result.food_name}`)}
                 >
                   <img
-                    className="autocomplete__image"
+                    className="autocomplete__result-image"
                     src={result.photo.thumb}
                     alt=""
                   />
-                  <span className="autocomplete__name">{result.food_name}</span>
+                  <span className="autocomplete__result-name">
+                    {result.food_name}
+                  </span>
                 </div>
               );
             })}
           </div>
         </div>
-      </div>
-      <div className="full-search-results">
+      </section>
+      <div className="full-search-results__container">
         {fullSearchResults.length > 0 ? (
           <div>
-            <h2>Showing search results</h2>
-            {fullSearchResults.map((result: FoodSearchResult) => {
-              return (
-                <div
-                  key={result.food_name}
-                  className="autocomplete__result"
-                  onClick={() => navigate(`/food/${result.food_name}`)}
-                >
-                  <img
-                    className="autocomplete__image"
-                    src={result.photo.thumb}
-                    alt=""
-                  />
-                  <span className="autocomplete__name">{result.food_name}</span>
-                </div>
-              );
-            })}
+            <h2 className="full-search-results__header">
+              <span>Showing</span> Results
+            </h2>
+            <div className="full-search-results">
+              {fullSearchResults.map((result: FoodSearchResult) => {
+                return (
+                  <div
+                    key={result.food_name}
+                    className="full-search-results__result"
+                    onClick={() => navigate(`/food/${result.food_name}`)}
+                  >
+                    <div>
+                      <img
+                        className="full-search-results__result-image"
+                        src={result.photo.thumb}
+                        alt=""
+                      />
+                      <span className="full-search-results__result-name">
+                        {result.food_name}
+                      </span>
+                    </div>
+                    <IoMdArrowDropright className="arrow-icon" />
+                  </div>
+                );
+              })}
+            </div>
           </div>
         ) : (
           ""
@@ -127,9 +162,6 @@ const FoodSearchPage = () => {
 };
 
 const Wrapper = styled.section`
-  /* display: flex;
-  flex-direction: column; */
-
   .search-container {
     position: relative;
     max-width: 100vw;
@@ -143,7 +175,7 @@ const Wrapper = styled.section`
     align-items: center;
   }
 
-  .overlay {
+  .search-container__overlay {
     position: absolute;
     top: 0;
     left: 0;
@@ -152,27 +184,51 @@ const Wrapper = styled.section`
     background-color: rgba(0, 0, 0, 0.5);
   }
 
-  .search__input {
-    height: 3rem;
-    width: 40rem;
-    position: relative;
-    z-index: 1;
+  .search-container__search-input-container {
+    display: flex;
+    height: 4rem;
+    gap: 0.4rem;
+    margin-bottom: 0.4rem;
   }
 
-  button {
-    height: 3rem;
-    z-index: 1;
+  .search-container__search-input {
+    font-family: inherit;
+    width: 50vw;
+    padding: 1rem;
+    font-size: 1.6rem;
+    font-weight: 500;
     position: relative;
+    z-index: 1;
+    outline: none;
+    border: none;
+    border-radius: 3px;
   }
 
-  .autocomplete__container {
+  .search-container__search-button {
+    font-family: inherit;
+    height: 100%;
+    width: 5rem;
+    z-index: 1;
     position: relative;
+    cursor: pointer;
+    margin-bottom: 0.5rem;
+    background-color: var(--light-orange);
+    color: var(--white);
+    border: none;
+    border-radius: 3px;
+    font-weight: 600;
+  }
+
+  .search-container__autocomplete {
+    position: absolute;
     background-color: white;
-    width: 100%;
+    width: calc(50vw + 5rem + 0.4rem);
     height: fit-content;
+    border-radius: 3px;
   }
 
   .autocomplete__result {
+    height: 5rem;
     display: flex;
     align-items: center;
     gap: 1rem;
@@ -184,8 +240,57 @@ const Wrapper = styled.section`
     border-bottom: 1px solid #817f7f63;
   }
 
-  .autocomplete__image {
+  .autocomplete__result-image {
     width: 5rem;
+    max-height: 5rem;
+  }
+
+  .full-search-results__header {
+    margin: 2rem 0 0 2rem;
+  }
+
+  .full-search-results__header span {
+    color: var(--light-orange);
+  }
+
+  .full-search-results {
+    padding: 3rem;
+    display: grid;
+    column-gap: 5rem;
+    row-gap: 2rem;
+    grid-template-columns: repeat(auto-fill, minmax(30rem, 1fr));
+  }
+
+  .full-search-results__result {
+    padding: 1rem;
+    height: 10rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 10px;
+    border: 2px solid #817f7f63;
+    cursor: pointer;
+  }
+
+  .full-search-results__result div {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    font-weight: 600;
+  }
+
+  .arrow-icon {
+    font-size: 4rem;
+    color: #63626262;
+  }
+
+  .full-search-results__result:hover .arrow-icon {
+    color: var(--black);
+  }
+
+  .full-search-results__result-image {
+    width: 10rem;
+    max-height: 9rem;
   }
 `;
 
