@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ExercisePage from "./pages/ExercisePage.tsx";
 import Navbar from "./components/Navbar.tsx";
 import FoodSearchPage from "./pages/FoodSearchPage.jsx";
+import FoodNutrientsPage from "./pages/FoodNutrientsPage.tsx";
 
 const App = () => {
   return (
@@ -13,6 +14,7 @@ const App = () => {
         <Route path="/exercises" element={<ExercisesPage />} />
         <Route path="/exercises/:id" element={<ExercisePage />} />
         <Route path="/food" element={<FoodSearchPage />} />
+        <Route path="/food/:id" element={<FoodNutrientsPage />} />
         <Route path="*" element={<ExercisesPage />} />
       </Routes>
     </Router>
