@@ -1,9 +1,10 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import styled from "styled-components";
 import NutrientsCard from "../components/nutrientsPage/NutrientsCard";
 import { FoodData, AltMeasure } from "../../types/main";
+import PieChart from "../components/nutrientsPage/PieChart";
 
 const FoodNutrients = () => {
   const { id } = useParams();
@@ -87,11 +88,19 @@ const FoodNutrients = () => {
   return (
     <Wrapper>
       <NutrientsCard foodData={foodData} />
+      <PieChart
+        values={[
+          foodData.nf_total_carbohydrate,
+          foodData.nf_protein,
+          foodData.nf_total_fat,
+        ]}
+      />
     </Wrapper>
   );
 };
 
 const Wrapper = styled.section`
+  display: flex;
   padding: 4rem 0 0 4rem;
 `;
 
