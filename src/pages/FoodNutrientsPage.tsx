@@ -5,10 +5,13 @@ import styled from "styled-components";
 import NutrientsCard from "../components/nutrientsPage/NutrientsCard";
 import { FoodData, AltMeasure } from "../../types/main";
 import PieChart from "../components/nutrientsPage/PieChart";
+import TimeToBurnCalories from "../components/nutrientsPage/TimeToBurnCalories";
 
 const FoodNutrients = () => {
   const { id } = useParams();
   const [foodData, setFoodData] = useState<FoodData | null>(null);
+  const [timesToMultiplyNutrients, setTimesToMultiplyNutrients] =
+    useState<number>(1);
 
   const getNutrients = async () => {
     try {
@@ -87,21 +90,40 @@ const FoodNutrients = () => {
 
   return (
     <Wrapper>
-      <NutrientsCard foodData={foodData} />
-      <PieChart
-        values={[
-          foodData.nf_total_carbohydrate,
-          foodData.nf_protein,
-          foodData.nf_total_fat,
-        ]}
+      <NutrientsCard
+        timesToMultiplyNutrients={timesToMultiplyNutrients}
+        setTimesToMultiplyNutrients={setTimesToMultiplyNutrients}
+        foodData={foodData}
       />
+      <div>
+        <TimeToBurnCalories
+          calories={Math.round(foodData.nf_calories * timesToMultiplyNutrients)}
+        />
+        <PieChart
+          values={[
+            foodData.nf_total_carbohydrate,
+            foodData.nf_protein,
+            foodData.nf_total_fat,
+          ]}
+        />
+      </div>
     </Wrapper>
   );
 };
 
 const Wrapper = styled.section`
   display: flex;
-  padding: 4rem 0 0 4rem;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 5rem;
+  padding: 4rem 4rem 0 4rem;
+
+  div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 export default FoodNutrients;

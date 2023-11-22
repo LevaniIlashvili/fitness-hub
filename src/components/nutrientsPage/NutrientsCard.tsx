@@ -1,17 +1,32 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import { FoodData } from "../../../types/main";
 
-const NutrientsCard = ({ foodData }) => {
+interface NutrientsCardProps {
+  foodData: FoodData;
+  timesToMultiplyNutrients: number;
+  setTimesToMultiplyNutrients: React.Dispatch<React.SetStateAction<number>>;
+}
+
+const NutrientsCard = ({
+  foodData,
+  timesToMultiplyNutrients,
+  setTimesToMultiplyNutrients,
+}: NutrientsCardProps) => {
   const [servingQty, setServingQty] = useState<number | null>(100);
   const [servingUnit, setServingUnit] = useState<string>("g");
   const [servingWeight, setServingWeight] = useState<number>(1);
 
   const nutrientCoefPerGram = 1 / foodData.serving_weight_grams;
 
+  useEffect(() => {
+    setTimesToMultiplyNutrients(
+      (servingQty ? servingQty : 1) * nutrientCoefPerGram * servingWeight
+    );
+  }, [servingQty, nutrientCoefPerGram, servingWeight]);
+
   const formatNumber = (num: number) => {
-    let number = num * (servingQty ? servingQty : 1);
-    number *= servingWeight * nutrientCoefPerGram;
-    console.log(number, nutrientCoefPerGram, servingWeight);
+    let number = num * timesToMultiplyNutrients;
     return number % 1 !== 0 ? Math.round(number * 10) / 10 : number.toFixed();
   };
 
@@ -62,12 +77,7 @@ const NutrientsCard = ({ foodData }) => {
       <h2>
         Calories{" "}
         <span>
-          {Math.round(
-            foodData.nf_calories *
-              (servingQty ? servingQty : 1) *
-              nutrientCoefPerGram *
-              servingWeight
-          )}
+          {Math.round(foodData.nf_calories * timesToMultiplyNutrients)}
         </span>
       </h2>
       <h4>
