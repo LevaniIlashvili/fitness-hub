@@ -16,9 +16,9 @@ const Navbar = () => {
         <Link className="link" to="/food">
           food
         </Link>
-        {/* <Link className="link" to="calculator">
+        <Link className="link" to="calculator">
           calculator
-        </Link> */}
+        </Link>
       </div>
     </Wrapper>
   );
