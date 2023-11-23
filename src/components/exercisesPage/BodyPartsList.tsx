@@ -4,6 +4,7 @@ import { useAppSelector, useAppDispatch } from "../../app/hooks";
 import { selectBodyPart } from "../../app/redux/bodyParts/bodyParts";
 import { goToPage } from "../../app/redux/pagination/pagination";
 import { LuChevronLeft, LuChevronRight } from "react-icons/lu";
+import RadioBtn from "../RadioBtn";
 
 const BodyPartsList = () => {
   const dispatch = useAppDispatch();
@@ -79,18 +80,16 @@ const BodyPartsList = () => {
       <ul className="body-parts__container" ref={containerRef}>
         {bodyParts.map((bodyPart, index) => {
           return (
-            <li className="body-parts__item" key={index}>
-              <input
-                type="radio"
+            <li key={index}>
+              <RadioBtn
                 name="body_parts"
                 id={bodyPart}
-                checked={bodyPart === selectedBodyPart}
-                onChange={() => {
+                isChecked={bodyPart === selectedBodyPart}
+                handleChange={() => {
                   dispatch(selectBodyPart(bodyPart));
                   dispatch(goToPage(0));
                 }}
               />
-              <label htmlFor={bodyPart}>{bodyPart}</label>
             </li>
           );
         })}
@@ -132,37 +131,6 @@ const Wrapper = styled.section`
 
   .scroll-button:hover {
     background-color: #97979784;
-  }
-
-  .body-parts__item {
-    white-space: nowrap;
-  }
-
-  .body-parts__item input {
-    display: none;
-  }
-
-  .body-parts__item label {
-    padding: 1rem;
-    border: 1px solid var(--gray);
-    border-radius: 3px;
-    font-weight: 500;
-    cursor: pointer;
-  }
-
-  .body-parts__item label:hover {
-    border-color: var(--orange);
-  }
-
-  .body-parts__item label:active {
-    background-color: var(--orange);
-    color: var(--white);
-  }
-
-  .body-parts__item input:checked + label {
-    background-color: var(--dark-orange);
-    border-color: var(--dark-orange);
-    color: var(--white);
   }
 `;
 
