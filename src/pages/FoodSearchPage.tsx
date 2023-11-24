@@ -1,5 +1,5 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+import axios, { CancelTokenSource } from "axios";
+import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import healthyVitaminColorful from "../assets/healthy-vitamin-colorful.jpg";
@@ -27,9 +27,17 @@ const FoodSearchPage = () => {
     FoodSearchResult[]
   >([]);
 
+  const cancelToken = useRef<CancelTokenSource | undefined>();
+
   const navigate = useNavigate();
 
   const getFoodSearchResults = async () => {
+    if (cancelToken.current) {
+      cancelToken.current.cancel("token cancelled");
+    }
+
+    cancelToken.current = axios.CancelToken.source();
+
     try {
       const response = await axios.get(
         `https://trackapi.nutritionix.com/v2/search/instant?query=${searchQuery}`,
@@ -38,38 +46,31 @@ const FoodSearchPage = () => {
             "x-app-id": import.meta.env.VITE_NUTRITIONIX_ID,
             "x-app-key": import.meta.env.VITE_NUTRITIONIX_KEY,
           },
+          cancelToken: cancelToken.current.token,
         }
       );
-      console.log(response.data.common);
+      console.log(searchQuery);
+      console.log("fetching data");
       setFoodSearchResults(response.data.common);
       setAutoCompleteResults(response.data.common.slice(0, 5));
     } catch (error) {
-      console.log(error);
+      if (axios.isCancel(error)) {
+        // Request was canceled, do nothing
+      } else {
+        console.log(error);
+      }
     }
   };
 
-  // const getFoodNutritionData = async () => {
-  //   try {
-  //     const response = await axios.post(
-  //       "https://trackapi.nutritionix.com/v2/natural/nutrients",
-  //       { query: [] },
-  //       {
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //           "x-app-id": import.meta.env.VITE_NUTRITIONIX_ID,
-  //           "x-app-key": import.meta.env.VITE_NUTRITIONIX_KEY,
-  //         },
-  //       }
-  //     );
-  //     console.log(response);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+  console.log(autoCompleteResults);
 
   useEffect(() => {
     if (!searchQuery) {
       setAutoCompleteResults([]);
+      if (cancelToken.current) {
+        cancelToken.current.cancel("token cancelled");
+      }
+
       return;
     }
     getFoodSearchResults();
