@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import CalorieIntakeCalculator from "../components/calculatorPage/CalorieIntakeCalculator";
 import styled from "styled-components";
 import RadioBtn from "../components/RadioBtn";
+import BMICalculator from "../components/calculatorPage/BMICalculator";
 
 const CalculatorsPage = () => {
   const [checkedCalculator, setCheckedCalculator] =
@@ -36,7 +37,11 @@ const CalculatorsPage = () => {
           handleChange={handleChange}
         />
       </div>
-      <CalorieIntakeCalculator />
+      {checkedCalculator === "calorie-calculator" ? (
+        <CalorieIntakeCalculator />
+      ) : (
+        <BMICalculator />
+      )}
     </Wrapper>
   );
 };
