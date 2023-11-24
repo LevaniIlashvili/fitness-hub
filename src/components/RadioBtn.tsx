@@ -3,12 +3,19 @@ import styled from "styled-components";
 
 interface RadioBtnProps {
   name: string;
+  labelName: string;
   id: string;
   isChecked: boolean;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const RadioBtn = ({ name, id, isChecked, handleChange }: RadioBtnProps) => {
+const RadioBtn = ({
+  name,
+  id,
+  labelName,
+  isChecked,
+  handleChange,
+}: RadioBtnProps) => {
   return (
     <Wrapper>
       <input
@@ -19,7 +26,7 @@ const RadioBtn = ({ name, id, isChecked, handleChange }: RadioBtnProps) => {
         checked={isChecked}
         onChange={handleChange}
       />
-      <label htmlFor={id}>{id}</label>
+      <label htmlFor={id}>{labelName}</label>
     </Wrapper>
   );
 };

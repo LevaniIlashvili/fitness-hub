@@ -76,12 +76,14 @@ const CalorieIntakeCalculator = () => {
         <RadioBtn
           name="gender"
           id="male"
+          labelName="Male"
           isChecked={gender === "male"}
           handleChange={handleGenderChange}
         />
         <RadioBtn
           name="gender"
           id="female"
+          labelName="Female"
           isChecked={gender === "female"}
           handleChange={handleGenderChange}
         />

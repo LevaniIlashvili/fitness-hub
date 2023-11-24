@@ -1,17 +1,57 @@
-import React from "react";
+import React, { useState } from "react";
 import CalorieIntakeCalculator from "../components/calculatorPage/CalorieIntakeCalculator";
 import styled from "styled-components";
+import RadioBtn from "../components/RadioBtn";
 
 const CalculatorsPage = () => {
+  const [checkedCalculator, setCheckedCalculator] =
+    useState<string>("calorie-calculator");
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCheckedCalculator(e.target.value);
+  };
+
   return (
     <Wrapper>
+      <div className="radio-btn-container">
+        <RadioBtn
+          name="calculator"
+          id="calorie-calculator"
+          labelName="Calorie Calculator"
+          isChecked={checkedCalculator === "calorie-calculator"}
+          handleChange={handleChange}
+        />
+        <RadioBtn
+          name="calculator"
+          id="bmi-calculator"
+          labelName="BMI Calculator"
+          isChecked={checkedCalculator === "bmi-calculator"}
+          handleChange={handleChange}
+        />
+        <RadioBtn
+          name="calculator"
+          id="ideal-weight-calculator"
+          labelName="Ideal Weight Calculator"
+          isChecked={checkedCalculator === "ideal-weight-calculator"}
+          handleChange={handleChange}
+        />
+      </div>
       <CalorieIntakeCalculator />
     </Wrapper>
   );
 };
 
 const Wrapper = styled.section`
-  padding: 2rem;
+  padding: 5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  .radio-btn-container {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 4rem;
+  }
 `;
 
 export default CalculatorsPage;

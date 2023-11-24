@@ -84,6 +84,7 @@ const BodyPartsList = () => {
               <RadioBtn
                 name="body_parts"
                 id={bodyPart}
+                labelName={bodyPart}
                 isChecked={bodyPart === selectedBodyPart}
                 handleChange={() => {
                   dispatch(selectBodyPart(bodyPart));
