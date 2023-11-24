@@ -29,13 +29,6 @@ const CalculatorsPage = () => {
           isChecked={checkedCalculator === "bmi-calculator"}
           handleChange={handleChange}
         />
-        <RadioBtn
-          name="calculator"
-          id="ideal-weight-calculator"
-          labelName="Ideal Weight Calculator"
-          isChecked={checkedCalculator === "ideal-weight-calculator"}
-          handleChange={handleChange}
-        />
       </div>
       {checkedCalculator === "calorie-calculator" ? (
         <CalorieIntakeCalculator />
