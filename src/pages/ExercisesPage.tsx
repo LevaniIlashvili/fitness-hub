@@ -70,7 +70,7 @@ const ExercisesPage = () => {
       <input
         type="search"
         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-          setSearchText(e.target.value)
+          setSearchText(e.target.value.toLowerCase())
         }
         className="search__input"
         placeholder="Search For Exercises"
