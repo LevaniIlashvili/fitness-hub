@@ -73,9 +73,9 @@ const Wrapper = styled.nav`
   flex-direction: column;
   padding: 1rem 2rem;
   gap: 1rem;
-  box-shadow: -1px 3px 19px 0px rgba(0, 0, 0, 0.46);
-  -webkit-box-shadow: -1px 3px 19px 0px rgba(0, 0, 0, 0.46);
-  -moz-box-shadow: -1px 3px 19px 0px rgba(0, 0, 0, 0.46);
+  box-shadow: -1px 3px 19px 0px rgba(0, 0, 0, 0.35);
+  -webkit-box-shadow: -1px 3px 19px 0px rgba(0, 0, 0, 0.35);
+  -moz-box-shadow: -1px 3px 19px 0px rgba(0, 0, 0, 0.35);
 
   .top {
     height: 5rem;
