@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { useParams } from "react-router-dom";
-import { dummyExercises } from "../../data";
 import { Exercise } from "../../types/main";
 import styled from "styled-components";
 import upperBodyIcon from "../assets/upper-body.png";
@@ -9,12 +9,27 @@ import dumbellIcon from "../assets/dumbell.png";
 import SimilarExercises from "../components/exercisePage/SimilarExercises";
 
 const ExercisePage = () => {
-  // work on dummy data for now
   const { id } = useParams();
+  const [exercise, setExercise] = useState<Exercise | null>(null);
 
-  const exercise: Exercise | undefined = dummyExercises.find(
-    (exercise) => exercise.id === id
-  );
+  const fetchExercise = async () => {
+    try {
+      const response = await axios.get(
+        `https://exercisedb.p.rapidapi.com/exercises/exercise/${id}`,
+        {
+          headers: {
+            "X-RapidAPI-Key": import.meta.env.VITE_EXERCISES_KEY,
+            "X-RapidAPI-Host": "exercisedb.p.rapidapi.com",
+          },
+        }
+      );
+      setExercise(response.data);
+    } catch (error) {}
+  };
+
+  useEffect(() => {
+    fetchExercise();
+  }, []);
 
   if (!exercise) return <div>error</div>;
 

@@ -1,9 +1,9 @@
 import styled from "styled-components";
-import { dummyExercises } from "../../../data";
 import ExerciseCard from "../exercisesPage/ExerciseCard";
 import React, { useState, useEffect } from "react";
 import { IoIosArrowRoundForward, IoIosArrowRoundBack } from "react-icons/io";
 import { Exercise } from "../../../types/main";
+import axios from "axios";
 
 interface WrapperProps {
   $screenwidth: number;
@@ -18,11 +18,30 @@ const SimilarExercises = ({
 }) => {
   const [currentPage, setCurrentPage] = useState<number>(0);
   const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth);
+  const [exercises, setExercises] = useState<Exercise[]>([]);
 
-  const exercises = dummyExercises.filter(
-    (exercise: Exercise): boolean =>
-      exercise.target === exerciseTarget && exercise.name !== exerciseName
-  );
+  const fetchExercises = async () => {
+    try {
+      const response = await axios.get(
+        `https://exercisedb.p.rapidapi.com/exercises/target/${exerciseTarget}`,
+        {
+          headers: {
+            "X-RapidAPI-Key": import.meta.env.VITE_EXERCISES_KEY,
+            "X-RapidAPI-Host": "exercisedb.p.rapidapi.com",
+          },
+        }
+      );
+      const exercises = response.data.filter(
+        (exercise: Exercise) =>
+          exercise.target === exerciseTarget && exercise.name !== exerciseName
+      );
+      setExercises(exercises);
+    } catch (error) {}
+  };
+
+  useEffect(() => {
+    fetchExercises();
+  }, []);
 
   useEffect(() => {
     const handleResize = () => setScreenWidth(window.innerWidth);
