@@ -33,12 +33,12 @@ const RadioBtn = ({
 
 const Wrapper = styled.div`
   white-space: nowrap;
-
   input {
     display: none;
   }
 
   label {
+    display: block;
     padding: 1rem;
     border: 1px solid var(--gray);
     border-radius: 3px;

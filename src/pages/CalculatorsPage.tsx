@@ -47,8 +47,13 @@ const Wrapper = styled.section`
 
   .radio-btn-container {
     display: flex;
+    flex-wrap: wrap;
     gap: 1rem;
     margin-bottom: 4rem;
+  }
+
+  @media (max-width: 500px) {
+    padding: 3rem 2rem;
   }
 `;
 

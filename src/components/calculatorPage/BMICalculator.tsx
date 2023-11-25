@@ -74,12 +74,6 @@ const Wrapper = styled.section`
     color: var(--orange);
   }
 
-  .radio-btn-container {
-    display: flex;
-    gap: 1rem;
-    margin-bottom: 2rem;
-  }
-
   .text-input-container {
     display: flex;
     flex-direction: column;
@@ -124,10 +118,6 @@ const Wrapper = styled.section`
     background-color: var(--dark-orange);
     color: var(--white);
     border: 1px solid transparent;
-  }
-
-  .calories {
-    font-weight: 500;
   }
 `;
 

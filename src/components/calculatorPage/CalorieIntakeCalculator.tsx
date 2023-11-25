@@ -244,10 +244,6 @@ const Wrapper = styled.section`
     color: var(--white);
     border: 1px solid transparent;
   }
-
-  .calories {
-    font-weight: 500;
-  }
 `;
 
 export default CalorieIntakeCalculator;
