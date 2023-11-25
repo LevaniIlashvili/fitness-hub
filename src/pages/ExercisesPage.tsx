@@ -7,6 +7,7 @@ import BodyPartsList from "../components/exercisesPage/BodyPartsList.tsx";
 import { useAppSelector } from "../app/hooks.ts";
 import { Exercise } from "../../types/main.ts";
 import LoadingScreen from "../components/LoadingScreen.tsx";
+import ErrorScreen from "../components/ErrorScreen.tsx";
 
 const ExercisesPage = () => {
   const selectedBodyPart = useAppSelector(
@@ -61,6 +62,8 @@ const ExercisesPage = () => {
   }, [selectedBodyPart, searchText]);
 
   if (isLoading) return <LoadingScreen />;
+
+  if (!exercises.length) return <ErrorScreen />;
 
   return (
     <Wrapper>

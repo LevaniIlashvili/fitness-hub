@@ -8,6 +8,7 @@ import targetIcon from "../assets/target.png";
 import dumbellIcon from "../assets/dumbell.png";
 import SimilarExercises from "../components/exercisePage/SimilarExercises";
 import LoadingScreen from "../components/LoadingScreen";
+import ErrorScreen from "../components/ErrorScreen";
 
 const ExercisePage = () => {
   const { id } = useParams();
@@ -39,7 +40,7 @@ const ExercisePage = () => {
 
   if (isLoading) return <LoadingScreen />;
 
-  if (!exercise) return <div>error</div>;
+  if (!exercise) return <ErrorScreen />;
 
   return (
     <Wrapper>

@@ -7,6 +7,7 @@ import { FoodData, AltMeasure } from "../../types/main";
 import PieChart from "../components/nutrientsPage/PieChart";
 import TimeToBurnCalories from "../components/nutrientsPage/TimeToBurnCalories";
 import LoadingScreen from "../components/LoadingScreen";
+import ErrorScreen from "../components/ErrorScreen";
 
 const FoodNutrients = () => {
   const { id } = useParams();
@@ -92,7 +93,7 @@ const FoodNutrients = () => {
 
   if (isLoading) return <LoadingScreen />;
 
-  if (!foodData) return <div>error</div>;
+  if (!foodData) return <ErrorScreen />;
 
   return (
     <Wrapper>
