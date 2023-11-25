@@ -2,7 +2,7 @@ import axios from "axios";
 
 const options = {
   params: {
-    limit: 150,
+    limit: 1500,
   },
   headers: {
     "X-RapidAPI-Key": import.meta.env.VITE_EXERCISES_KEY,

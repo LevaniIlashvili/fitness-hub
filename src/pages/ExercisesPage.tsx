@@ -13,67 +13,26 @@ const ExercisesPage = () => {
     (state) => state.bodyParts.selectedBodyPart
   );
   const currentPage = useAppSelector((state) => state.pagination.currentPage);
-  const [exercises, setExercises] = useState<Exercise[]>(dummyExercises);
-  // const [exercises, setExercises] = useState([]);
+  const [exercises, setExercises] = useState<Exercise[]>([]);
+  const [filteredExercises, setFilteredExercises] = useState<Exercise[]>([]);
   const [searchText, setSearchText] = useState<string>("");
 
-  // const getAllExercises = async () => {
-  //   const allExercises = await fetchExercisesData(
-  //     "https://exercisedb.p.rapidapi.com/exercises"
-  //   );
-  //   setExercises(allExercises);
-  // };
+  const getAllExercises = async () => {
+    const allExercises = await fetchExercisesData(
+      "https://exercisedb.p.rapidapi.com/exercises"
+    );
+    setExercises(allExercises);
+    setFilteredExercises(allExercises);
+  };
 
-  // const getExercisesByBodyPart = async () => {
-  //   // const exercises = await fetchExercisesData(
-  //   //   `https://exercisedb.p.rapidapi.com/exercises/bodyPart/${selectedBodyPart}`
-  //   // );
-  //   if (selectedBodyPart === "all") {
-  //     setExercises(dummyExercises);
-  //   } else {
-  //     setExercises(
-  //       dummyExercises.filter(
-  //         (exercise) => exercise.bodyPart === selectedBodyPart
-  //       )
-  //     );
-  //   }
-  // };
-
-  // const searchExercises = async () => {
-  //   setExercises(
-  //     dummyExercises.filter((exercise) => {
-  //       if (selectedBodyPart === "all") {
-  //         if (
-  //           exercise.name.toLowerCase().includes(searchText) ||
-  //           exercise.target.toLowerCase().includes(searchText) ||
-  //           exercise.equipment.toLowerCase().includes(searchText) ||
-  //           exercise.bodyPart.toLowerCase().includes(searchText)
-  //         ) {
-  //           return exercise;
-  //         }
-  //       } else {
-  //         if (
-  //           (exercise.name.toLowerCase().includes(searchText) ||
-  //             exercise.target.toLowerCase().includes(searchText) ||
-  //             exercise.equipment.toLowerCase().includes(searchText) ||
-  //             exercise.bodyPart.toLowerCase().includes(searchText)) &&
-  //           exercise.bodyPart === selectedBodyPart
-  //         ) {
-  //           return exercise;
-  //         }
-  //       }
-  //     })
-  //   );
-  // };
-
-  // useEffect(() => {
-  //   getAllExercises();
-  // }, []);
+  useEffect(() => {
+    getAllExercises();
+  }, []);
 
   useEffect(() => {
     if (!selectedBodyPart) return;
-    setExercises(
-      dummyExercises.filter((exercise: Exercise): boolean => {
+    setFilteredExercises(
+      exercises.filter((exercise: Exercise) => {
         if (selectedBodyPart === "all") {
           return (
             exercise.name.toLowerCase().includes(searchText) ||
@@ -108,13 +67,13 @@ const ExercisesPage = () => {
       />
       <BodyPartsList />
       <section className="exercises__container">
-        {exercises
+        {filteredExercises
           .slice(currentPage * 9, (currentPage + 1) * 9)
           .map((exercise: Exercise) => {
             return <ExerciseCard key={exercise.id} exercise={exercise} />;
           })}
       </section>
-      <Pagination exercises={exercises} />
+      <Pagination exercises={filteredExercises} />
     </Wrapper>
   );
 };
