@@ -293,6 +293,16 @@ const Wrapper = styled.section`
     width: 10rem;
     max-height: 9rem;
   }
+
+  @media (max-width: 768px) {
+    .search-container__search-input {
+      width: 70vw;
+    }
+
+    .search-container__autocomplete {
+      width: calc(70vw + 5rem + 0.4rem);
+    }
+  }
 `;
 
 export default FoodSearchPage;

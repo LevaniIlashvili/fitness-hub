@@ -132,6 +132,7 @@ const Wrapper = styled.section<WrapperProps>`
   }
 
   .navigation__btn {
+    background-color: transparent;
     border: none;
     font-size: 5rem;
     color: var(--dark-orange);

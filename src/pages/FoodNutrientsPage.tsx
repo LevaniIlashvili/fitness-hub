@@ -138,7 +138,7 @@ const Wrapper = styled.section`
     cursor: pointer;
     color: var(--dark-orange);
     position: absolute;
-    top: 0;
+    top: -1rem;
     left: 0;
   }
 
