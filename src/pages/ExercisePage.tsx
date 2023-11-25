@@ -114,7 +114,9 @@ const Wrapper = styled.section`
 
   .exercise__img {
     width: 50vw;
+    max-width: 60rem;
     height: 50vw;
+    max-height: 60rem;
   }
 
   .exercise__header {

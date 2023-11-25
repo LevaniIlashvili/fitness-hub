@@ -107,7 +107,8 @@ const Wrapper = styled.section<WrapperProps>`
     grid-template-columns: ${(props) =>
       `repeat(${
         props.$screenwidth > 800 ? 3 : props.$screenwidth > 400 ? 2 : 1
-      }, minmax(10rem, 1fr))`};
+      }, minmax(10rem, 50rem))`};
+    justify-content: space-between;
     column-gap: 2rem;
     display: grid;
     padding: 0 3rem;
