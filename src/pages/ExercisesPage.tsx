@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { fetchExercisesData } from "../../fetchExercisesData";
-import { dummyExercises } from "../../data";
 import styled from "styled-components";
 import ExerciseCard from "../components/exercisesPage/ExerciseCard.tsx";
 import Pagination from "../components/exercisesPage/Pagination.tsx";
