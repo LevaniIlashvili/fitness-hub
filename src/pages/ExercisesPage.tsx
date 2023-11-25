@@ -6,6 +6,7 @@ import Pagination from "../components/exercisesPage/Pagination.tsx";
 import BodyPartsList from "../components/exercisesPage/BodyPartsList.tsx";
 import { useAppSelector } from "../app/hooks.ts";
 import { Exercise } from "../../types/main.ts";
+import LoadingScreen from "../components/LoadingScreen.tsx";
 
 const ExercisesPage = () => {
   const selectedBodyPart = useAppSelector(
@@ -15,13 +16,20 @@ const ExercisesPage = () => {
   const [exercises, setExercises] = useState<Exercise[]>([]);
   const [filteredExercises, setFilteredExercises] = useState<Exercise[]>([]);
   const [searchText, setSearchText] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const getAllExercises = async () => {
-    const allExercises = await fetchExercisesData(
-      "https://exercisedb.p.rapidapi.com/exercises"
-    );
-    setExercises(allExercises);
-    setFilteredExercises(allExercises);
+    try {
+      const allExercises = await fetchExercisesData(
+        "https://exercisedb.p.rapidapi.com/exercises"
+      );
+      setIsLoading(false);
+      setExercises(allExercises);
+      setFilteredExercises(allExercises);
+    } catch (error) {
+      console.log(error);
+      setIsLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -52,7 +60,7 @@ const ExercisesPage = () => {
     );
   }, [selectedBodyPart, searchText]);
 
-  console.log(exercises);
+  if (isLoading) return <LoadingScreen />;
 
   return (
     <Wrapper>

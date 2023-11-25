@@ -7,10 +7,12 @@ import upperBodyIcon from "../assets/upper-body.png";
 import targetIcon from "../assets/target.png";
 import dumbellIcon from "../assets/dumbell.png";
 import SimilarExercises from "../components/exercisePage/SimilarExercises";
+import LoadingScreen from "../components/LoadingScreen";
 
 const ExercisePage = () => {
   const { id } = useParams();
   const [exercise, setExercise] = useState<Exercise | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const fetchExercise = async () => {
     try {
@@ -23,13 +25,19 @@ const ExercisePage = () => {
           },
         }
       );
+      setIsLoading(false);
       setExercise(response.data);
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+      setIsLoading(false);
+    }
   };
 
   useEffect(() => {
     fetchExercise();
   }, []);
+
+  if (isLoading) return <LoadingScreen />;
 
   if (!exercise) return <div>error</div>;
 

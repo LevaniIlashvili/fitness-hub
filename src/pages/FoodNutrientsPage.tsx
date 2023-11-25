@@ -6,12 +6,14 @@ import NutrientsCard from "../components/nutrientsPage/NutrientsCard";
 import { FoodData, AltMeasure } from "../../types/main";
 import PieChart from "../components/nutrientsPage/PieChart";
 import TimeToBurnCalories from "../components/nutrientsPage/TimeToBurnCalories";
+import LoadingScreen from "../components/LoadingScreen";
 
 const FoodNutrients = () => {
   const { id } = useParams();
   const [foodData, setFoodData] = useState<FoodData | null>(null);
   const [timesToMultiplyNutrients, setTimesToMultiplyNutrients] =
     useState<number>(1);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const getNutrients = async () => {
     try {
@@ -25,12 +27,14 @@ const FoodNutrients = () => {
           },
         }
       );
+      setIsLoading(false);
       const foodData = response.data.foods[0];
       setFoodData(foodData);
       addMoreNutrients(foodData);
       setUniqueMeasures(foodData);
       console.log(response);
     } catch (error) {
+      setIsLoading(false);
       console.log(error);
     }
   };
@@ -86,7 +90,9 @@ const FoodNutrients = () => {
     getNutrients();
   }, []);
 
-  if (!foodData) return <h1>Loading...</h1>;
+  if (isLoading) return <LoadingScreen />;
+
+  if (!foodData) return <div>error</div>;
 
   return (
     <Wrapper>
