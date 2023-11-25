@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Exercise } from "../../types/main";
 import styled from "styled-components";
 import upperBodyIcon from "../assets/upper-body.png";
@@ -9,9 +9,11 @@ import dumbellIcon from "../assets/dumbell.png";
 import SimilarExercises from "../components/exercisePage/SimilarExercises";
 import LoadingScreen from "../components/LoadingScreen";
 import ErrorScreen from "../components/ErrorScreen";
+import { IoIosArrowRoundBack } from "react-icons/io";
 
 const ExercisePage = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [exercise, setExercise] = useState<Exercise | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
@@ -45,6 +47,10 @@ const ExercisePage = () => {
   return (
     <Wrapper>
       <div className="exercise__container">
+        <IoIosArrowRoundBack
+          className="back-arrow-icon"
+          onClick={() => navigate("/exercises")}
+        />
         <div className="exercise__img-container">
           <img
             className="exercise__img"
@@ -90,9 +96,16 @@ const ExercisePage = () => {
 };
 
 const Wrapper = styled.section`
+  .back-arrow-icon {
+    font-size: 7rem;
+    cursor: pointer;
+    color: var(--dark-orange);
+    position: absolute;
+  }
+
   .exercise__container {
+    padding-top: 5rem;
     display: flex;
-    padding-top: 10rem;
     margin-bottom: 5rem;
   }
 

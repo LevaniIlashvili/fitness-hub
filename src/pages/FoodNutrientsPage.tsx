@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import styled from "styled-components";
 import NutrientsCard from "../components/nutrientsPage/NutrientsCard";
@@ -8,9 +8,11 @@ import PieChart from "../components/nutrientsPage/PieChart";
 import TimeToBurnCalories from "../components/nutrientsPage/TimeToBurnCalories";
 import LoadingScreen from "../components/LoadingScreen";
 import ErrorScreen from "../components/ErrorScreen";
+import { IoIosArrowRoundBack } from "react-icons/io";
 
 const FoodNutrients = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [foodData, setFoodData] = useState<FoodData | null>(null);
   const [timesToMultiplyNutrients, setTimesToMultiplyNutrients] =
     useState<number>(1);
@@ -97,6 +99,10 @@ const FoodNutrients = () => {
 
   return (
     <Wrapper>
+      <IoIosArrowRoundBack
+        className="back-arrow-icon"
+        onClick={() => navigate("/food")}
+      />
       <NutrientsCard
         timesToMultiplyNutrients={timesToMultiplyNutrients}
         setTimesToMultiplyNutrients={setTimesToMultiplyNutrients}
@@ -125,6 +131,16 @@ const Wrapper = styled.section`
   flex-wrap: wrap;
   gap: 5rem;
   padding: 4rem 4rem 0 4rem;
+  position: relative;
+
+  .back-arrow-icon {
+    font-size: 7rem;
+    cursor: pointer;
+    color: var(--dark-orange);
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
 
   div {
     display: flex;
