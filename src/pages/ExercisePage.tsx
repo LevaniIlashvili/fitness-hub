@@ -101,9 +101,12 @@ const Wrapper = styled.section`
     cursor: pointer;
     color: var(--dark-orange);
     position: absolute;
+    top: 0;
+    left: 0;
   }
 
   .exercise__container {
+    position: relative;
     padding-top: 5rem;
     display: flex;
     margin-bottom: 5rem;
@@ -143,7 +146,7 @@ const Wrapper = styled.section`
   }
 
   @media (max-width: 800px) {
-    .exercise {
+    .exercise__container {
       flex-direction: column;
       align-items: center;
       padding: 3rem;
