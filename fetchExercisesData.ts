@@ -7,6 +7,7 @@ const options = {
   headers: {
     "X-RapidAPI-Key": import.meta.env.VITE_EXERCISES_KEY,
     "X-RapidAPI-Host": "exercisedb.p.rapidapi.com",
+    "Accept-Encoding": "br, gzip, compress",
   },
 };
 

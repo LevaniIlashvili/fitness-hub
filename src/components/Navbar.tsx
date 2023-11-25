@@ -11,7 +11,7 @@ const Navbar = () => {
     <Wrapper>
       <div className="top">
         <div className="logo-container">
-          <img src={workoutImg} alt="Workout Icon" />
+          <img src={workoutImg} alt="Workout Icon" width="40" height="50" />
           <h1>Fitness Hub</h1>
         </div>
 
