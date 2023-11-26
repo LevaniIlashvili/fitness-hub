@@ -5,6 +5,8 @@ import ExerciseCard from "../components/exercisesPage/ExerciseCard.tsx";
 import Pagination from "../components/exercisesPage/Pagination.tsx";
 import BodyPartsList from "../components/exercisesPage/BodyPartsList.tsx";
 import { useAppSelector } from "../app/hooks.ts";
+import { useAppDispatch } from "../app/hooks.ts";
+import { addExercises } from "../app/redux/exercises/exercises.ts";
 import { Exercise } from "../../types/main.ts";
 import LoadingScreen from "../components/LoadingScreen.tsx";
 import ErrorScreen from "../components/ErrorScreen.tsx";
@@ -14,7 +16,8 @@ const ExercisesPage = () => {
     (state) => state.bodyParts.selectedBodyPart
   );
   const currentPage = useAppSelector((state) => state.pagination.currentPage);
-  const [exercises, setExercises] = useState<Exercise[]>([]);
+  const exercises = useAppSelector((state) => state.exercises);
+  const dispatch = useAppDispatch();
   const [filteredExercises, setFilteredExercises] = useState<Exercise[]>([]);
   const [searchText, setSearchText] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -25,8 +28,9 @@ const ExercisesPage = () => {
         "https://exercisedb.p.rapidapi.com/exercises"
       );
       setIsLoading(false);
-      setExercises(allExercises);
+      dispatch(addExercises(allExercises));
       setFilteredExercises(allExercises);
+      console.log("fetched exercises");
     } catch (error) {
       console.log(error);
       setIsLoading(false);
@@ -34,6 +38,11 @@ const ExercisesPage = () => {
   };
 
   useEffect(() => {
+    if (exercises.length) {
+      setFilteredExercises(exercises);
+      setIsLoading(false);
+      return;
+    }
     getAllExercises();
   }, []);
 
