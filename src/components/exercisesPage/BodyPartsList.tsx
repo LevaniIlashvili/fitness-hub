@@ -20,7 +20,7 @@ const BodyPartsList = () => {
   const scroll = (direction: string): void => {
     const container = containerRef.current;
     if (container) {
-      const scrollAmount = 100; // Adjust this value as needed
+      const scrollAmount = 100;
       const containerWidth = container.clientWidth;
       const maxScrollLeft = container.scrollWidth - containerWidth;
 

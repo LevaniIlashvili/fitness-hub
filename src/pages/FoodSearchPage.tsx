@@ -49,8 +49,6 @@ const FoodSearchPage = () => {
           cancelToken: cancelToken.current.token,
         }
       );
-      console.log(searchQuery);
-      console.log("fetching data");
       setFoodSearchResults(response.data.common);
       setAutoCompleteResults(response.data.common.slice(0, 5));
     } catch (error) {
@@ -61,8 +59,6 @@ const FoodSearchPage = () => {
       }
     }
   };
-
-  console.log(autoCompleteResults);
 
   useEffect(() => {
     if (!searchQuery) {

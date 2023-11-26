@@ -19,7 +19,6 @@ const TimeToBurnCalories = ({ calories }: { calories: number }) => {
     } else {
       const hours = Math.floor(time);
       const minutes = time % 1;
-      console.log(minutes);
       return `${hours}h ${Math.round(minutes * 60)} min`;
     }
   };

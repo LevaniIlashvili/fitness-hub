@@ -35,7 +35,6 @@ const FoodNutrients = () => {
       setFoodData(foodData);
       addMoreNutrients(foodData);
       setUniqueMeasures(foodData);
-      console.log(response);
     } catch (error) {
       setIsLoading(false);
       console.log(error);
@@ -70,7 +69,6 @@ const FoodNutrients = () => {
             break;
           case 324:
             data.nf_vitamin_d = nutrient.value;
-            console.log(data.nf_vitamin_d);
             break;
           case 605:
             data.nf_trans_fat = nutrient.value;

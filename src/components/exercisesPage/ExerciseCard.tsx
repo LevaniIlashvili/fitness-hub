@@ -40,7 +40,7 @@ const Wrapper = styled.article`
   .image__container {
     position: relative;
     overflow: hidden;
-    padding-bottom: 100%; /* Set the aspect ratio (e.g., 1:1) */
+    padding-bottom: 100%; /* Set the aspect ratio */
   }
 
   img {

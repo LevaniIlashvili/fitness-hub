@@ -48,7 +48,6 @@ const PieChart = ({ values }) => {
 };
 
 const Wrapper = styled.section`
-  /* display: flex; */
   width: 30rem;
   height: 30rem;
 `;
