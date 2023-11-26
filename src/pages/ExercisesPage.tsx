@@ -101,7 +101,7 @@ const Wrapper = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 5rem;
+  padding-top: 15rem;
   gap: 5rem;
 
   .search__input {

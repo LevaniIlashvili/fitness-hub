@@ -40,7 +40,7 @@ const CalculatorsPage = () => {
 };
 
 const Wrapper = styled.section`
-  padding: 5rem;
+  padding: 10rem 5rem 5rem 5rem;
   display: flex;
   flex-direction: column;
   justify-content: center;

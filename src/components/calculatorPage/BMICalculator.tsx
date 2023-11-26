@@ -90,6 +90,8 @@ const Wrapper = styled.section`
     padding: 0.5rem;
     font-size: 1.6rem;
     outline: none;
+    border: 1px solid var(--gray);
+    border-radius: 3px;
   }
 
   button {

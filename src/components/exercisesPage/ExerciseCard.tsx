@@ -73,10 +73,12 @@ const Wrapper = styled.article`
 
   .exercise-target__body-part {
     background-color: var(--dark-orange);
+    text-transform: capitalize;
   }
 
   .exercise-target__muscle {
     background-color: var(--extra-light-orange);
+    text-transform: capitalize;
   }
 
   .exercise-name {

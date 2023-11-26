@@ -198,10 +198,12 @@ const Wrapper = styled.section`
 
   input[type="text"] {
     width: 100%;
-    height: 3rem;
-    padding: 0.5rem;
+    height: 3.5rem;
+    padding: 1rem;
     font-size: 1.6rem;
     outline: none;
+    border: 1px solid var(--gray);
+    border-radius: 3px;
   }
 
   .select-container {
@@ -212,9 +214,12 @@ const Wrapper = styled.section`
 
     select {
       width: 100%;
-      height: 3rem;
+      height: 3.5rem;
+      padding: 0.5rem;
       font-size: 1.6rem;
       outline: none;
+      border: 1px solid var(--gray);
+      border-radius: 3px;
     }
   }
 

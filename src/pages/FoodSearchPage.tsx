@@ -162,7 +162,7 @@ const Wrapper = styled.section`
   .search-container {
     position: relative;
     max-width: 100vw;
-    height: calc(100vh - 7rem);
+    height: calc(100vh);
     background-image: url(${healthyVitaminColorful});
     background-size: cover;
     background-position: center;

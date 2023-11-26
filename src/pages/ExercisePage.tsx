@@ -96,6 +96,8 @@ const ExercisePage = () => {
 };
 
 const Wrapper = styled.section`
+  padding-top: 8rem;
+
   .back-arrow-icon {
     font-size: 7rem;
     cursor: pointer;

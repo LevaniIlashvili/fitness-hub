@@ -128,7 +128,7 @@ const Wrapper = styled.section`
   align-items: center;
   flex-wrap: wrap;
   gap: 5rem;
-  padding: 4rem 4rem 0 4rem;
+  padding: 10rem 4rem 0 4rem;
   position: relative;
 
   .back-arrow-icon {

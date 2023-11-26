@@ -68,7 +68,10 @@ const Navbar = () => {
 };
 
 const Wrapper = styled.nav`
-  position: relative;
+  position: fixed;
+  background-color: var(--white);
+  width: 100vw;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   padding: 1rem 2rem;
