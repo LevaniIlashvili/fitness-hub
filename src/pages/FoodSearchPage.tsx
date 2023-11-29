@@ -104,7 +104,13 @@ const FoodSearchPage = () => {
                 <div
                   key={result.food_name}
                   className="autocomplete__result"
-                  onClick={() => navigate(`/food/${result.food_name}`)}
+                  onClick={() =>
+                    navigate(
+                      `/food/${encodeURIComponent(
+                        result.food_name.replace(/%/g, "%25")
+                      )}`
+                    )
+                  }
                 >
                   <img
                     className="autocomplete__result-image"
@@ -132,7 +138,13 @@ const FoodSearchPage = () => {
                   <div
                     key={result.food_name}
                     className="full-search-results__result"
-                    onClick={() => navigate(`/food/${result.food_name}`)}
+                    onClick={() =>
+                      navigate(
+                        `/food/${encodeURIComponent(
+                          result.food_name.replace(/%/g, "%25")
+                        )}`
+                      )
+                    }
                   >
                     <div>
                       <img
