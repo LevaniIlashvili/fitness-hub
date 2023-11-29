@@ -83,8 +83,8 @@ const Wrapper = styled.nav`
   .top {
     height: 5rem;
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    position: relative;
   }
 
   .logo-container {
@@ -102,7 +102,9 @@ const Wrapper = styled.nav`
   }
 
   .link-container {
-    margin: auto;
+    position: absolute;
+    top: 1.5rem;
+    left: calc(50% - 12rem);
     display: flex;
     gap: 3rem;
   }
