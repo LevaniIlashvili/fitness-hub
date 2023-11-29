@@ -83,6 +83,7 @@ const Wrapper = styled.nav`
   .top {
     height: 5rem;
     display: flex;
+    justify-content: space-between;
     align-items: center;
     position: relative;
   }
