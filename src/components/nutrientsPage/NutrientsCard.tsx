@@ -77,62 +77,64 @@ const NutrientsCard = ({
       <h2>
         Calories{" "}
         <span>
-          {Math.round(foodData.nf_calories * timesToMultiplyNutrients)}
+          {Math.round(foodData.nf_calories * timesToMultiplyNutrients) || 0}
         </span>
       </h2>
       <h4>
-        Total Fat <span>{formatNumber(foodData.nf_total_fat)} g</span>
+        Total Fat <span>{formatNumber(foodData.nf_total_fat) || 0} g</span>
       </h4>
       <p className="sub-nutrient">
-        Saturated Fat <span>{formatNumber(foodData.nf_saturated_fat)} g</span>
+        Saturated Fat{" "}
+        <span>{formatNumber(foodData.nf_saturated_fat) || 0} g</span>
       </p>
       {foodData.nf_trans_fat !== null &&
         foodData.nf_trans_fat !== undefined && (
           <p className="sub-nutrient">
-            Trans Fat <span>{formatNumber(foodData.nf_trans_fat)} g</span>
+            Trans Fat <span>{formatNumber(foodData.nf_trans_fat) || 0} g</span>
           </p>
         )}
       <p className="sub-nutrient">
         Polyunsaturated Fat{" "}
-        <span>{formatNumber(foodData.nf_polyunsaturated_fat)} g</span>
+        <span>{formatNumber(foodData.nf_polyunsaturated_fat) || 0} g</span>
       </p>
       <p className="sub-nutrient">
         Monounsaturated Fat{" "}
-        <span>{formatNumber(foodData.nf_monounsaturated_fat)} g</span>
+        <span>{formatNumber(foodData.nf_monounsaturated_fat) || 0} g</span>
       </p>
       <h4>
-        Cholesterol <span>{formatNumber(foodData.nf_cholesterol)} mg</span>
+        Cholesterol <span>{formatNumber(foodData.nf_cholesterol) || 0} mg</span>
       </h4>
       <h4>
-        Sodium <span>{formatNumber(foodData.nf_sodium)} mg</span>
+        Sodium <span>{formatNumber(foodData.nf_sodium) || 0} mg</span>
       </h4>
       <h4>
         Total Carbohydrate{" "}
-        <span>{formatNumber(foodData.nf_total_carbohydrate)} g</span>
+        <span>{formatNumber(foodData.nf_total_carbohydrate) || 0} g</span>
       </h4>
       <p className="sub-nutrient">
-        Dietary Fiber <span>{formatNumber(foodData.nf_dietary_fiber)} g</span>
+        Dietary Fiber{" "}
+        <span>{formatNumber(foodData.nf_dietary_fiber || 0)} g</span>
       </p>
       <p className="sub-nutrient">
-        Sugars <span>{formatNumber(foodData.nf_sugars)} g</span>
+        Sugars <span>{formatNumber(foodData.nf_sugars) || 0} g</span>
       </p>
       <h4>
-        protein <span>{formatNumber(foodData.nf_protein)} g</span>
+        protein <span>{formatNumber(foodData.nf_protein) || 0} g</span>
       </h4>
       <p>
-        Vitamin D <span>{formatNumber(foodData.nf_vitamin_d)} mcg</span>
+        Vitamin D <span>{formatNumber(foodData.nf_vitamin_d) || 0} mcg</span>
       </p>
       <p>
-        Calcium <span>{formatNumber(foodData.nf_calcium)} mg</span>
+        Calcium <span>{formatNumber(foodData.nf_calcium) || 0} mg</span>
       </p>
       <p>
-        Iron <span>{formatNumber(foodData.nf_iron)} mg</span>
+        Iron <span>{formatNumber(foodData.nf_iron) || 0} mg</span>
       </p>
       <p>
-        Potassium <span>{formatNumber(foodData.nf_potassium)} mg</span>
+        Potassium <span>{formatNumber(foodData.nf_potassium) || 0} mg</span>
       </p>
       <h4>
-        Caffeine <span> {formatNumber(foodData.nf_caffeine)} mg</span>
+        Caffeine <span> {formatNumber(foodData.nf_caffeine) || 0} mg</span>
       </h4>
     </Wrapper>
   );
@@ -150,6 +152,7 @@ const Wrapper = styled.section`
   }
 
   select {
+    max-width: 80%;
     outline: none;
   }
 
